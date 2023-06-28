@@ -11,7 +11,7 @@ const App = () => {
 
   useEffect(() => {
     realmStore.openRealm();
-  }, []);
+  });
 
   return (
     <View style={styles.container}>

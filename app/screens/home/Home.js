@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     homeStore.initialLoad();
-  }, []);
+  });
 
   return (
     <View testID={'home'}>

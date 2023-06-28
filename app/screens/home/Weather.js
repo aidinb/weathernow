@@ -17,7 +17,7 @@ const Weather = ({navigation}) => {
     navigation.setOptions({
       title: homeStore.selectedCity.name,
     });
-  }, [navigation]);
+  }, [navigation, homeStore.selectedCity.name]);
 
   return (
     <FlatList
