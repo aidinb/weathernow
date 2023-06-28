@@ -1,15 +1,13 @@
 import React, {useEffect} from 'react';
-import {Dimensions, FlatList, View} from 'react-native';
+import {Dimensions, FlatList, StyleSheet, View} from 'react-native';
 
 import {observer} from 'mobx-react';
-import {useTranslation} from 'react-i18next';
 import {useStores} from '../../store';
 import City from '../../components/City';
 
 const {width} = Dimensions.get('window');
 
 const Home = () => {
-  const {t} = useTranslation();
   const {homeStore} = useStores();
 
   useEffect(() => {
@@ -21,13 +19,8 @@ const Home = () => {
       <FlatList
         data={homeStore.cities}
         keyExtractor={item => item.name}
-        style={{
-          width,
-        }}
-        contentContainerStyle={{
-          alignItems: 'center',
-          paddingBottom: 100,
-        }}
+        style={styles.list}
+        contentContainerStyle={styles.listContainer}
         onRefresh={async () => {
           await homeStore.getCities();
         }}
@@ -44,5 +37,15 @@ const Home = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  list: {
+    width,
+  },
+  listContainer: {
+    alignItems: 'center',
+    paddingBottom: 100,
+  },
+});
 
 export default observer(Home);

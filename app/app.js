@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {observer} from 'mobx-react';
 import {NavigationContainer} from '@react-navigation/native';
 import {renderScreens} from './router/index';
@@ -14,12 +14,15 @@ const App = () => {
   }, []);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.container}>
       <NavigationContainer ref={navigationRef}>
         {renderScreens()}
       </NavigationContainer>
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {flex: 1},
+});
 
 export default observer(App);
