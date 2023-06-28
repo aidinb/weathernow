@@ -1,0 +1,108 @@
+{
+  "name": "WeatherNow",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "lint": "eslint .",
+    "start": "react-native start",
+    "test": "jest --silent",
+    "eslint": "npx eslint --fix ./app",
+    "e2eIosDebug": "detox build --configuration ios.sim.debug && detox test --configuration ios.sim.debug",
+    "e2eAndroidDebug": "detox build --configuration android.emu.debug && detox build --configuration android.emu.debug",
+    "e2eIosRelease": "detox build --configuration ios.sim.release && detox build --configuration ios.sim.release",
+    "e2eAndroidRelease": "detox build --configuration android.emu.release && detox build --configuration android.emu.release"
+  },
+  "dependencies": {
+    "@babel/preset-typescript": "^7.22.5",
+    "@react-native-async-storage/async-storage": "^1.18.2",
+    "@react-native-community/hooks": "^3.0.0",
+    "@react-native-community/netinfo": "^9.3.10",
+    "@react-native-community/slider": "^4.4.2",
+    "@react-native-community/toolbar-android": "^0.2.1",
+    "@react-native-firebase/analytics": "^17.5.0",
+    "@react-native-firebase/app": "^17.5.0",
+    "@react-native-firebase/crashlytics": "^17.5.0",
+    "@react-native-firebase/dynamic-links": "^17.5.0",
+    "@react-native-firebase/messaging": "^17.5.0",
+    "@react-native-firebase/perf": "^17.5.0",
+    "@react-native-firebase/remote-config": "^17.5.0",
+    "@react-navigation/native": "^6.1.7",
+    "@react-navigation/native-stack": "^6.9.13",
+    "@react-navigation/stack": "^6.3.17",
+    "axios": "^1.4.0",
+    "babel-eslint": "^10.1.0",
+    "i18next": "^23.2.3",
+    "i18next-browser-languagedetector": "^7.1.0",
+    "i18next-http-backend": "^2.2.1",
+    "lodash": "^4.17.21",
+    "metro-config": "^0.76.7",
+    "mobx": "^6.9.0",
+    "mobx-react": "^7.6.0",
+    "moment": "^2.29.4",
+    "react": "18.2.0",
+    "react-i18next": "^13.0.1",
+    "react-native": "0.72.0",
+    "react-native-device-info": "^10.6.0",
+    "react-native-gesture-handler": "^2.12.0",
+    "react-native-localize": "^3.0.1",
+    "react-native-pager-view": "^6.2.0",
+    "react-native-reanimated": "^3.3.0",
+    "react-native-safe-area-context": "^4.6.3",
+    "react-native-screens": "^3.22.0",
+    "react-native-svg": "^13.9.0",
+    "react-native-svg-transformer": "^1.0.0",
+    "react-native-vector-icons": "^9.2.0",
+    "realm": "^11.10.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@babel/plugin-transform-private-methods": "^7.22.5",
+    "@babel/preset-env": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
+    "@cfaester/enzyme-adapter-react-18": "^0.7.0",
+    "@react-native/eslint-config": "^0.72.2",
+    "@react-native/metro-config": "^0.72.6",
+    "@tsconfig/react-native": "^3.0.0",
+    "@types/metro-config": "^0.76.3",
+    "@types/react": "^18.0.24",
+    "@types/react-test-renderer": "^18.0.0",
+    "babel-jest": "^29.2.1",
+    "chai": "^4.3.7",
+    "detox": "^20.9.1",
+    "enzyme": "^3.11.0",
+    "eslint": "^8.19.0",
+    "jest": "^29.5.0",
+    "metro-react-native-babel-preset": "0.76.5",
+    "prettier": "^2.4.1",
+    "react-test-renderer": "18.2.0",
+    "typescript": "4.8.4"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "jest": {
+    "preset": "react-native",
+    "setupFiles": [
+      "./__config__/setupTest.js"
+    ],
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 10,
+        "functions": 10,
+        "lines": 10,
+        "statements": 10
+      }
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native||@shoutem)",
+      "jest-runner"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  }
+}
