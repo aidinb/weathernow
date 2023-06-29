@@ -3,33 +3,34 @@ import {
   Dimensions,
   Text,
   TouchableOpacity,
-  Image,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 
 import {observer} from 'mobx-react';
 import {COLORS} from '../style';
 import {useTranslation} from 'react-i18next';
+import FastImage from 'react-native-fast-image';
 
 const {width} = Dimensions.get('window');
 
-const City = props => {
+const City = ({city, onPress, style}) => {
   const {t} = useTranslation();
-  const city = props.city || null;
-  const name = city.name || null;
-  const picture = city.picture || null;
+  const {name, picture} = city || {};
 
   return (
-    <TouchableOpacity
-      onPress={props.onPress}
-      style={[props.style, styles.itemContainer]}>
+    <TouchableOpacity onPress={onPress} style={[styles.itemContainer, style]}>
       <Text style={styles.itemText}>{t(name)}</Text>
-      <Image
+      <FastImage
         source={{
-          uri: picture,
+          uri: picture || 'https://placehold.co/600x400', // Replace with a placeholder image URL or a default image URL
         }}
-        resizeMode="cover"
+        resizeMode={FastImage.resizeMode.cover}
         style={styles.itemImage}
+        placeholderStyle={styles.itemImage}
+        PlaceholderContent={
+          <ActivityIndicator size="large" color={COLORS.primary} />
+        }
       />
     </TouchableOpacity>
   );

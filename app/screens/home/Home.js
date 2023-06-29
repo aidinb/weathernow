@@ -28,6 +28,19 @@ const Home = ({navigation}) => {
     }
   }, [isFocused]);
 
+  const handleRefresh = async () => {
+    await homeStore.initialLoad();
+  };
+
+  const renderCity = ({item}) => (
+    <City
+      onPress={async () => {
+        await homeStore.navigateToCityDetail(item.name);
+      }}
+      city={item}
+    />
+  );
+
   return (
     <View testID={'home'} style={styles.container}>
       <FlatList
@@ -36,18 +49,9 @@ const Home = ({navigation}) => {
         keyExtractor={item => item.name}
         style={styles.list}
         contentContainerStyle={styles.listContainer}
-        onRefresh={async () => {
-          await homeStore.initialLoad();
-        }}
+        onRefresh={handleRefresh}
         refreshing={homeStore.loading}
-        renderItem={({item}) => (
-          <City
-            onPress={async () => {
-              await homeStore.navigateToCityDetail(item.name);
-            }}
-            city={item}
-          />
-        )}
+        renderItem={renderCity}
       />
       {homeStore.loading ? (
         <View style={styles.loading}>

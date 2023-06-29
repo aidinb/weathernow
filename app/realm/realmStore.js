@@ -45,10 +45,11 @@ class RealmStore {
     try {
       this.openRealm();
       let realmCities = this.realm.objects('City');
-      realmCities = Object.values(JSON.parse(JSON.stringify(realmCities)));
-      const sortedCities = realmCities.sort((a, b) =>
-        a.name.localeCompare(b.name),
-      );
+      // const sortedCities = Array.from(realmCities).sort((a, b) =>
+      const sortedCities = Object.values(
+        JSON.parse(JSON.stringify(realmCities)),
+      ).sort((a, b) => a.name.localeCompare(b.name));
+      console.log('sortedCities', sortedCities);
       sortedCities.forEach(cityData => {
         cityData.temperatures.sort(
           (a, b) => new Date(a.date) - new Date(b.date),

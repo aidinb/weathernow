@@ -45,6 +45,7 @@
     "react-i18next": "^13.0.1",
     "react-native": "0.72.0",
     "react-native-device-info": "^10.6.0",
+    "react-native-fast-image": "^8.6.3",
     "react-native-gesture-handler": "^2.12.0",
     "react-native-localize": "^3.0.1",
     "react-native-pager-view": "^6.2.0",
@@ -105,6 +106,8 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
     },
-    "modulePathIgnorePatterns": ["__e2e__"]
+    "modulePathIgnorePatterns": [
+      "__e2e__"
+    ]
   }
 }

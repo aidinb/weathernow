@@ -11,17 +11,18 @@ const {width} = Dimensions.get('window');
 
 const Weather = ({navigation}) => {
   const {t} = useTranslation();
+  const {selectedCity} = useStores().homeStore;
   const {homeStore} = useStores();
 
   useEffect(() => {
     navigation.setOptions({
-      title: t(homeStore.selectedCity.name),
+      title: t(selectedCity.name),
     });
-  }, [navigation, homeStore.selectedCity.name]);
+  }, [navigation, selectedCity.name]);
 
   return (
     <FlatList
-      data={homeStore.selectedCity.temperatures}
+      data={selectedCity.temperatures}
       keyExtractor={item => item.date}
       style={styles.list}
       contentContainerStyle={styles.listContainer}

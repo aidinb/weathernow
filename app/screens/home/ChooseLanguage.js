@@ -12,7 +12,6 @@ import {COLORS} from '../../style';
 import {useTranslation} from 'react-i18next';
 import Nl from '../../../public/images/nl.svg';
 import En from '../../../public/images/en.svg';
-import NavigationService from '../../router/NavigationService';
 import i18n from 'i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -27,25 +26,23 @@ const ChooseLanguage = ({navigation}) => {
     });
   }, [navigation]);
 
+  const handleLanguageSelection = async language => {
+    await AsyncStorage.setItem('language', language);
+    await i18n.changeLanguage(language);
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={async () => {
-          await AsyncStorage.setItem('language', 'en');
-          await i18n.changeLanguage('en');
-          NavigationService.goBack();
-        }}
+        onPress={() => handleLanguageSelection('en')}
         style={styles.itemContainer}>
         <En width={30} height={30} />
         <Text style={styles.itemText}>{t('English')}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={async () => {
-          await AsyncStorage.setItem('language', 'nl');
-          await i18n.changeLanguage('nl');
-          NavigationService.goBack();
-        }}
+        onPress={() => handleLanguageSelection('nl')}
         style={styles.itemContainer}>
         <Nl width={30} height={30} />
 

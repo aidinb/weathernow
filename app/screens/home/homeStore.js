@@ -54,27 +54,30 @@ class HomeStore {
   addCitiesToRealm = async () => {
     try {
       this.setLoading(true);
+
       const cities = await getCities();
-      const cityWithTemprature = Object.values(
-        cities.reduce((result, item) => {
-          const cityName = item.city.name;
+
+      const cityWithTemperature = Object.entries(
+        cities.reduce((result, {city, temp, date, tempType}) => {
+          const {name: cityName} = city;
+
           if (!result[cityName]) {
             result[cityName] = {
-              city: item.city,
+              city,
               temps: [],
             };
           }
-          result[cityName].temps.push({
-            temp: item.temp,
-            date: item.date,
-            tempType: item.tempType,
-          });
+
+          result[cityName].temps.push({temp, date, tempType});
           return result;
         }, {}),
       );
-      cityWithTemprature.forEach(cityData => {
-        this.realmStore.addCityToRealm(cityData);
-      });
+
+      await Promise.all(
+        cityWithTemperature.map(([_, cityData]) =>
+          this.realmStore.addCityToRealm(cityData),
+        ),
+      );
     } catch (err) {
       console.log('addCitiesToRealm err', err);
       Firebase.recordErrorCrashlytics('addCitiesToRealm', err);
@@ -94,9 +97,12 @@ class HomeStore {
         a.name.localeCompare(b.name),
       );
       sortedCities.forEach(cityData => {
-        cityData.temperatures.sort(
-          (a, b) => new Date(a.date) - new Date(b.date),
-        );
+        const {temperatures} = cityData;
+        if (temperatures) {
+          cityData.temperatures.sort(
+            (a, b) => new Date(a.date) - new Date(b.date),
+          );
+        }
       });
       console.log('sortedCities', sortedCities);
       this.setCities(sortedCities);
@@ -110,11 +116,11 @@ class HomeStore {
   };
   navigateToCityDetail = async cityName => {
     try {
-      Firebase.logCrashlytics('navigateToCityDetail');
       this.setLoading(true);
       const selectedCity = this.cities.find(item => item.name === cityName);
       this.setSelectedCity(selectedCity);
       NavigationService.navigate('Weather');
+      Firebase.logCrashlytics('navigateToCityDetail');
     } catch (err) {
       Firebase.setLogEvent('navigateToCityDetail');
       console.log('error in navigateToCityDetail', err);
@@ -124,15 +130,18 @@ class HomeStore {
     }
   };
 
-  returnTemperature(item) {
-    if (item.tempType === 'F') {
-      return ((item.temp - 32) / 1.8).toFixed(2);
-    } else if (item.tempType === 'K') {
-      return (item.temp - 273.15).toFixed(2);
-    } else {
-      return item.temp.toFixed(2);
+  returnTemperature = item => {
+    const {temp, tempType} = item;
+
+    switch (tempType) {
+      case 'F':
+        return ((temp - 32) / 1.8).toFixed(2);
+      case 'K':
+        return (temp - 273.15).toFixed(2);
+      default:
+        return temp.toFixed(2);
     }
-  }
+  };
 
   checkUserLanguage = async () => {
     try {

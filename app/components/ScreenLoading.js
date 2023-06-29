@@ -2,13 +2,11 @@ import React from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {COLORS} from '../style';
 
-const ScreenLoading = ({size = 'large', color = COLORS.primary}) => {
-  return (
-    <View style={styles.container}>
-      <ActivityIndicator size={size} color={color} />
-    </View>
-  );
-};
+const ScreenLoading = ({size, color}) => (
+  <View style={styles.container}>
+    <ActivityIndicator size={size || 'large'} color={color || COLORS.primary} />
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
