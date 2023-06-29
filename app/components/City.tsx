@@ -6,7 +6,6 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
-
 import {observer} from 'mobx-react';
 import {COLORS} from '../style';
 import {useTranslation} from 'react-i18next';
@@ -14,7 +13,16 @@ import FastImage from 'react-native-fast-image';
 
 const {width} = Dimensions.get('window');
 
-const City = ({city, onPress, style}) => {
+interface CityProps {
+  city: {
+    name: string;
+    picture: string;
+  };
+  onPress: () => void;
+  style?: object;
+}
+
+const City: React.FC<CityProps> = ({city, onPress, style}) => {
   const {t} = useTranslation();
   const {name, picture} = city || {};
 
@@ -28,13 +36,12 @@ const City = ({city, onPress, style}) => {
         resizeMode={FastImage.resizeMode.cover}
         style={styles.itemImage}
         placeholderStyle={styles.itemImage}
-        PlaceholderContent={
-          <ActivityIndicator size="large" color={COLORS.primary} />
-        }
+        placeholder={<ActivityIndicator size="large" color={COLORS.primary} />}
       />
     </TouchableOpacity>
   );
 };
+
 const styles = StyleSheet.create({
   itemContainer: {
     alignItems: 'center',
@@ -62,4 +69,5 @@ const styles = StyleSheet.create({
     height: 100,
   },
 });
+
 export default observer(City);

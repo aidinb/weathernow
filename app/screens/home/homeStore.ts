@@ -6,8 +6,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18n from 'i18next';
 
 class HomeStore {
+  cities: Array<any> = [];
+  loading = false;
+  isConnected = true;
+  selectedCity: any = {};
+
   constructor(realmStore) {
     this.realmStore = realmStore;
+
     makeObservable(this, {
       cities: observable,
       loading: observable,
@@ -25,22 +31,18 @@ class HomeStore {
     });
   }
 
-  cities = [];
-
-  loading = false;
-  isConnected = true;
-  selectedCity = {};
-
-  setCities = array => {
+  setCities = (array: Array<any>) => {
     this.cities = array;
   };
 
-  setLoading = bool => {
+  setLoading = (bool: boolean) => {
     this.loading = bool;
   };
-  setSelectedCity = object => {
+
+  setSelectedCity = (object: any) => {
     this.selectedCity = object;
   };
+
   initialLoad = async () => {
     try {
       await this.addCitiesToRealm();
@@ -58,7 +60,7 @@ class HomeStore {
       const cities = await getCities();
 
       const cityWithTemperature = Object.entries(
-        cities.reduce((result, {city, temp, date, tempType}) => {
+        cities.reduce((result: any, {city, temp, date, tempType}: any) => {
           const {name: cityName} = city;
 
           if (!result[cityName]) {
@@ -74,7 +76,7 @@ class HomeStore {
       );
 
       await Promise.all(
-        cityWithTemperature.map(([_, cityData]) =>
+        cityWithTemperature.map(([_, cityData]: any) =>
           this.realmStore.addCityToRealm(cityData),
         ),
       );
@@ -93,14 +95,14 @@ class HomeStore {
       Firebase.logCrashlytics('getCities');
       const realmCities = this.realmStore.realmGetCities();
 
-      const sortedCities = realmCities.sort((a, b) =>
+      const sortedCities = realmCities.sort((a: any, b: any) =>
         a.name.localeCompare(b.name),
       );
-      sortedCities.forEach(cityData => {
+      sortedCities.forEach((cityData: any) => {
         const {temperatures} = cityData;
         if (temperatures) {
           cityData.temperatures.sort(
-            (a, b) => new Date(a.date) - new Date(b.date),
+            (a: any, b: any) => new Date(a.date) - new Date(b.date),
           );
         }
       });
@@ -114,10 +116,13 @@ class HomeStore {
       this.setLoading(false);
     }
   };
-  navigateToCityDetail = async cityName => {
+
+  navigateToCityDetail = async (cityName: string) => {
     try {
       this.setLoading(true);
-      const selectedCity = this.cities.find(item => item.name === cityName);
+      const selectedCity = this.cities.find(
+        (item: any) => item.name === cityName,
+      );
       this.setSelectedCity(selectedCity);
       NavigationService.navigate('Weather');
       Firebase.logCrashlytics('navigateToCityDetail');
@@ -130,7 +135,7 @@ class HomeStore {
     }
   };
 
-  returnTemperature = item => {
+  returnTemperature = (item: any) => {
     const {temp, tempType} = item;
 
     switch (tempType) {

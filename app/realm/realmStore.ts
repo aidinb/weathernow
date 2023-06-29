@@ -4,6 +4,8 @@ import Realm from 'realm';
 import Firebase from '../actions/firebase';
 
 class RealmStore {
+  realm={};
+
   constructor() {
     makeObservable(this, {
       realm: observable,
@@ -12,7 +14,6 @@ class RealmStore {
       addCityToRealm: action,
     });
   }
-  realm = {};
 
   openRealm = () => {
     this.realm = new Realm({
@@ -21,7 +22,7 @@ class RealmStore {
     });
   };
 
-  addCityToRealm = city => {
+  addCityToRealm = (city: any) => {
     try {
       this.openRealm();
 
@@ -41,18 +42,18 @@ class RealmStore {
       Firebase.recordErrorCrashlytics('addCityToRealm', err);
     }
   };
+
   realmGetCities = () => {
     try {
       this.openRealm();
       let realmCities = this.realm.objects('City');
-      // const sortedCities = Array.from(realmCities).sort((a, b) =>
       const sortedCities = Object.values(
         JSON.parse(JSON.stringify(realmCities)),
-      ).sort((a, b) => a.name.localeCompare(b.name));
+      ).sort((a: any, b: any) => a.name.localeCompare(b.name));
       console.log('sortedCities', sortedCities);
-      sortedCities.forEach(cityData => {
+      sortedCities.forEach((cityData: any) => {
         cityData.temperatures.sort(
-          (a, b) => new Date(a.date) - new Date(b.date),
+          (a: any, b: any) => new Date(a.date) - new Date(b.date),
         );
       });
       return sortedCities;

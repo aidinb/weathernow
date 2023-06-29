@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {Dimensions, FlatList, Text, View, StyleSheet} from 'react-native';
-
 import {observer} from 'mobx-react';
 import {COLORS} from '../../style';
 import {useTranslation} from 'react-i18next';
@@ -9,7 +8,7 @@ import moment from 'moment';
 
 const {width} = Dimensions.get('window');
 
-const Weather = ({navigation}) => {
+const Weather: React.FC<{navigation: any}> = ({navigation}) => {
   const {t} = useTranslation();
   const {selectedCity} = useStores().homeStore;
   const {homeStore} = useStores();
@@ -41,6 +40,7 @@ const Weather = ({navigation}) => {
     />
   );
 };
+
 const styles = StyleSheet.create({
   list: {
     width,

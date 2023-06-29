@@ -94,9 +94,9 @@ cd ./ios arch -x86_64 pod install for M1 Mac
 
 1. Create a Firebase project on the Firebase console.
 2. Enable Firebase Analytics and Crashlytics for your project.
-3. Retrieve your Firebase configuration (API keys, project ID, etc.).
+3. Retrieve your Firebase configuration (Api keys, project ID, etc.).
 4. Update the Firebase configuration in the app by replacing the placeholders 
-5. in `src/firebase.js` with your own Firebase credentials.
+5. in `src/firebase.ts` with your own Firebase credentials.
 
 ### Configure i18n
 

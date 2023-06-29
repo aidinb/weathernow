@@ -2,11 +2,11 @@ import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {observer} from 'mobx-react';
 import {NavigationContainer} from '@react-navigation/native';
-import {renderScreens} from './router/index';
+import {renderScreens} from './router';
 import {navigationRef} from './router/NavigationService';
 import {useStores} from './store';
 
-const App = () => {
+const App: React.FC = () => {
   const {realmStore, homeStore} = useStores();
 
   useEffect(() => {
@@ -25,6 +25,7 @@ const App = () => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {flex: 1},
 });

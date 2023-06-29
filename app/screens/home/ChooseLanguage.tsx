@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
 import {observer} from 'mobx-react';
 import {COLORS} from '../../style';
 import {useTranslation} from 'react-i18next';
@@ -17,7 +16,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {width} = Dimensions.get('window');
 
-const ChooseLanguage = ({navigation}) => {
+const ChooseLanguage: React.FC<{navigation: any}> = ({navigation}) => {
   const {t} = useTranslation();
 
   useEffect(() => {
@@ -26,7 +25,7 @@ const ChooseLanguage = ({navigation}) => {
     });
   }, [navigation]);
 
-  const handleLanguageSelection = async language => {
+  const handleLanguageSelection = async (language: string) => {
     await AsyncStorage.setItem('language', language);
     await i18n.changeLanguage(language);
     navigation.goBack();
@@ -45,7 +44,6 @@ const ChooseLanguage = ({navigation}) => {
         onPress={() => handleLanguageSelection('nl')}
         style={styles.itemContainer}>
         <Nl width={30} height={30} />
-
         <Text style={styles.itemText}>{t('Dutch')}</Text>
       </TouchableOpacity>
     </View>

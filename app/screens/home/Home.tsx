@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {Dimensions, FlatList, StyleSheet, View} from 'react-native';
-
 import {observer} from 'mobx-react';
 import {useStores} from '../../store';
 import City from '../../components/City';
@@ -11,7 +10,7 @@ import {useIsFocused} from '@react-navigation/native';
 
 const {width} = Dimensions.get('window');
 
-const Home = ({navigation}) => {
+const Home: React.FC<{navigation: any}> = ({navigation}) => {
   const {homeStore} = useStores();
   const {t} = useTranslation();
   const isFocused = useIsFocused();
@@ -32,7 +31,7 @@ const Home = ({navigation}) => {
     await homeStore.initialLoad();
   };
 
-  const renderCity = ({item}) => (
+  const renderCity = ({item}: {item: any}) => (
     <City
       onPress={async () => {
         await homeStore.navigateToCityDetail(item.name);

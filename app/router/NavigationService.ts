@@ -6,10 +6,8 @@ import {
 
 export const navigationRef = createNavigationContainerRef();
 
-const navigate = (name, params) => {
-  // navigationRef.dispatch(navigationRef.navigate(name, params),)
+const navigate = (name: string, params?: object) => {
   if (navigationRef.isReady()) {
-    // @ts-ignore
     navigationRef.navigate(name, params);
   }
 };
@@ -27,9 +25,9 @@ const closeDrawer = () => {
 };
 
 const currentRoute = () => {
-  const cuurentRoute = navigationRef.getCurrentRoute();
-  if (cuurentRoute.name) {
-    return cuurentRoute.name;
+  const currentRouteObj = navigationRef.getCurrentRoute();
+  if (currentRouteObj && currentRouteObj.name) {
+    return currentRouteObj.name;
   }
 };
 
