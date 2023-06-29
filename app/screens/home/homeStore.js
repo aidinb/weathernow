@@ -5,7 +5,7 @@ import NavigationService from '../../router/NavigationService';
 
 class HomeStore {
   constructor(realmStore) {
-    this.realmStore = realmStore
+    this.realmStore = realmStore;
     makeObservable(this, {
       cities: observable,
       loading: observable,
@@ -69,9 +69,8 @@ class HomeStore {
       });
     } catch (err) {
       console.log('addCitiesToRealm err', err);
-    }finally {
+    } finally {
       this.setLoading(false);
-
     }
   };
 

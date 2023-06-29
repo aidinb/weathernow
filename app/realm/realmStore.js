@@ -43,7 +43,7 @@ class RealmStore {
     try {
       this.openRealm();
       let realmCities = this.realm.objects('City');
-      realmCities = Object.values(JSON.parse(JSON.stringify(realmCities)))
+      realmCities = Object.values(JSON.parse(JSON.stringify(realmCities)));
       const sortedCities = realmCities.sort((a, b) =>
         a.name.localeCompare(b.name),
       );
@@ -53,10 +53,9 @@ class RealmStore {
         );
       });
       return sortedCities;
-    }catch (err){
+    } catch (err) {
       console.log('realmGetCities err', err);
     }
-
   };
 }
 

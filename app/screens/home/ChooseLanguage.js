@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from 'react';
 import {
   Dimensions,
   StyleSheet,
@@ -14,13 +14,12 @@ import Nl from '../../../public/images/nl.svg';
 import En from '../../../public/images/en.svg';
 import NavigationService from '../../router/NavigationService';
 import i18n from 'i18next';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {width} = Dimensions.get('window');
 
 const ChooseLanguage = ({navigation}) => {
   const {t} = useTranslation();
-
 
   useEffect(() => {
     navigation.setOptions({
@@ -32,7 +31,7 @@ const ChooseLanguage = ({navigation}) => {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={async () => {
-          await AsyncStorage.setItem('language', 'en')
+          await AsyncStorage.setItem('language', 'en');
           await i18n.changeLanguage('en');
           NavigationService.goBack();
         }}
@@ -43,7 +42,7 @@ const ChooseLanguage = ({navigation}) => {
 
       <TouchableOpacity
         onPress={async () => {
-          await AsyncStorage.setItem('language', 'nl')
+          await AsyncStorage.setItem('language', 'nl');
           await i18n.changeLanguage('nl');
           NavigationService.goBack();
         }}
