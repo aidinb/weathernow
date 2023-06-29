@@ -10,8 +10,9 @@ class HomeStore {
   loading = false;
   isConnected = true;
   selectedCity: any = {};
+  realmStore: any = {};
 
-  constructor(realmStore) {
+  constructor(realmStore: any) {
     this.realmStore = realmStore;
 
     makeObservable(this, {
@@ -102,6 +103,7 @@ class HomeStore {
         const {temperatures} = cityData;
         if (temperatures) {
           cityData.temperatures.sort(
+            // @ts-ignore
             (a: any, b: any) => new Date(a.date) - new Date(b.date),
           );
         }

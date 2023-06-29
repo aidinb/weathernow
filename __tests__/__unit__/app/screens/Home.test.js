@@ -52,7 +52,7 @@ describe('Home', () => {
 
         const view = HomeScreen.root.findAllByType(View)
 
-        expect(view).toHaveLength(14)
+        expect(view).toHaveLength(20)
     })
 
     it('should have FlatList', () => {

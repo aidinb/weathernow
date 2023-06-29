@@ -47,7 +47,7 @@ const firebase = {
     crashlytics().log(name);
   },
 
-  recordErrorCrashlytics(name: string, error: Error): void {
+  recordErrorCrashlytics(name: string, error: any): void {
     if (error?.response?.data?.message) {
       crashlytics().recordError(new Error(error.response.data.message), name);
     } else if (

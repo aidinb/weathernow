@@ -2,7 +2,9 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {TouchableOpacity} from 'react-native';
 import NavigationService from './NavigationService';
+// @ts-ignore
 import En from '../../public/images/en.svg';
+// @ts-ignore
 import Nl from '../../public/images/nl.svg';
 import Home from '../screens/home/Home';
 import Weather from '../screens/home/Weather';

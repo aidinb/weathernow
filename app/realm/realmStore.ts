@@ -4,7 +4,7 @@ import Realm from 'realm';
 import Firebase from '../actions/firebase';
 
 class RealmStore {
-  realm={};
+  realm = {};
 
   constructor() {
     makeObservable(this, {
@@ -25,8 +25,9 @@ class RealmStore {
   addCityToRealm = (city: any) => {
     try {
       this.openRealm();
-
+      // @ts-ignore
       this.realm.write(() => {
+        // @ts-ignore
         this.realm.create(
           'City',
           {
@@ -46,13 +47,16 @@ class RealmStore {
   realmGetCities = () => {
     try {
       this.openRealm();
+      // @ts-ignore
       let realmCities = this.realm.objects('City');
       const sortedCities = Object.values(
         JSON.parse(JSON.stringify(realmCities)),
       ).sort((a: any, b: any) => a.name.localeCompare(b.name));
       console.log('sortedCities', sortedCities);
       sortedCities.forEach((cityData: any) => {
+        // @ts-ignore
         cityData.temperatures.sort(
+          // @ts-ignore
           (a: any, b: any) => new Date(a.date) - new Date(b.date),
         );
       });

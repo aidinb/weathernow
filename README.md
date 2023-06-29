@@ -34,16 +34,6 @@ By utilizing Realm, the app can store and retrieve weather data even when the de
 ensuring a seamless user experience. Users can access previously fetched weather information
 without an internet connection.
 
-# JavaScript as the Primary Language
-
-The WeatherNow app is primarily written in JavaScript.
-The decision to use JavaScript is based on factors such as the developer's familiarity with
-the language and the compatibility with existing JavaScript-based codebases.
-While TypeScript is gaining popularity for its static typing and enhanced tooling,
-JavaScript was chosen due to the developer's proficiency and productivity.
-However, considering the benefits of TypeScript, transitioning to TypeScript in the future
-is accepted.
-
 ## Features
 
 - Real-time weather information for different locations.
@@ -159,10 +149,10 @@ yarn test
 ### Run end-to-end tests
 
 ```
-npm run e2eIosDebug  build and run the ios on debug version
-npm run e2eAndroidDebug  build and run the android on debug version
-npm run e2eIosRelease  build and run the ios on release version
-npm run e2eAndroidRelease  build and run the android on release version
+npm run e2e:ios:debug  build and run the ios on debug version
+npm run e2e:android:debug  build and run the android on debug version
+npm run e2e:ios:release  build and run the ios on release version
+npm run e2e:android:release  build and run the android on release version
 
 ```
 

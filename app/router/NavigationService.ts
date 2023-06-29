@@ -8,6 +8,7 @@ export const navigationRef = createNavigationContainerRef();
 
 const navigate = (name: string, params?: object) => {
   if (navigationRef.isReady()) {
+    // @ts-ignore
     navigationRef.navigate(name, params);
   }
 };
