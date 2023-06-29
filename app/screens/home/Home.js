@@ -31,6 +31,7 @@ const Home = ({navigation}) => {
   return (
     <View testID={'home'} style={styles.container}>
       <FlatList
+        extraData={homeStore.loading}
         data={homeStore.cities}
         keyExtractor={item => item.name}
         style={styles.list}
@@ -63,6 +64,8 @@ const styles = StyleSheet.create({
   },
   list: {
     width,
+    flex: 1,
+
   },
   listContainer: {
     alignItems: 'center',

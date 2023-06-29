@@ -39,8 +39,13 @@ class HomeStore {
     this.selectedCity = object;
   };
   initialLoad = async () => {
-    await this.addCitiesToRealm();
-    await this.getCitiesFromRealm();
+    try {
+      await this.addCitiesToRealm();
+      await this.getCitiesFromRealm();
+    }catch (err){
+      console.log('initialLoad err', err);
+    }
+
   };
 
   addCitiesToRealm = async () => {
@@ -89,6 +94,7 @@ class HomeStore {
           (a, b) => new Date(a.date) - new Date(b.date),
         );
       });
+      console.log('sortedCities',sortedCities)
       this.setCities(sortedCities);
     } catch (err) {
       Firebase.setLogEvent('getCities');
