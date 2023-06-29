@@ -14,8 +14,7 @@ const languageDetector = {
   init: () => {},
 };
 
-i18n // loads translations from locize.com -> change to i18next-xhr-backend to load them from your own server
-  // @ts-ignore
+i18n
   .use(languageDetector)
   .use(initReactI18next)
   .init({

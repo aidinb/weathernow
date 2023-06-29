@@ -2,6 +2,11 @@
 
 exports[`Home renders correctly SnapShot works 1`] = `
 <View
+  style={
+    {
+      "flex": 1,
+    }
+  }
   testID="home"
 >
   <RCTScrollView
@@ -12,6 +17,7 @@ exports[`Home renders correctly SnapShot works 1`] = `
       }
     }
     data={[]}
+    extraData={false}
     getItem={[Function]}
     getItemCount={[Function]}
     keyExtractor={[Function]}
@@ -36,6 +42,7 @@ exports[`Home renders correctly SnapShot works 1`] = `
     stickyHeaderIndices={[]}
     style={
       {
+        "flex": 1,
         "width": 750,
       }
     }

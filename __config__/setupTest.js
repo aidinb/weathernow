@@ -2,15 +2,13 @@ import 'react-native'
 import React from 'react'
 import renderer from 'react-test-renderer'
 import Adapter from '@cfaester/enzyme-adapter-react-18'
-import Enzyme, {mount, shallow} from 'enzyme'
+import Enzyme, {shallow} from 'enzyme'
 import chai from 'chai'
 
 
 
 
 Enzyme.configure({adapter: new Adapter()})
-// global.fetch = () => new Promise(() => {
-// })
 global.React = React
 global.renderer = renderer
 global.shallow = shallow
@@ -66,11 +64,21 @@ jest.mock('@react-native-async-storage/async-storage', () => {
 })
 
 
-jest.mock('react-i18next', () => ({
-    useTranslation: () => ({
-        t: (key: string) => key,
-    }),
-
+jest.mock("react-i18next", () => ({
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    useTranslation: () => {
+        return {
+            t: (str: string) => str,
+            i18n: {
+                changeLanguage: () => new Promise(() => {}),
+            },
+        };
+    },
+    initReactI18next: {
+        type: "3rdParty",
+        init: jest.fn(),
+    },
+    I18nextProvider:jest.fn()
 }))
 
 jest.mock('@react-navigation/native', () => {
@@ -85,7 +93,16 @@ jest.mock('@react-navigation/native', () => {
           .mockReturnValue(function NavigationContainer(props) {
               return null
           }),
-
+        useIsFocused: jest
+          .fn()
+          .mockReturnValue(function NavigationContainer(props) {
+              return null
+          }),
+        navigation: {
+            navigate: jest.fn(()=>{
+                setOptions: jest.fn()
+            })
+        }
     }
 });
 

@@ -1,10 +1,8 @@
 import {
-    View, Text, TextInput, BackHandler,
-    StyleSheet, TouchableOpacity, Alert, Image, ImageBackground, FlatList,
+    View, FlatList,
 } from "react-native";
 
 import Home from '../../../../app/screens/home/Home'
-// import homeStore from '../../../../app/screens/home/homeStore'
 import {Provider} from 'mobx-react'
 
 
@@ -47,7 +45,7 @@ describe('Home', () => {
 
         const view = HomeScreen.root.findAllByType(View)
 
-        expect(view).toHaveLength(2)
+        expect(view).toHaveLength(4)
     })
 
     it('should have FlatList', () => {

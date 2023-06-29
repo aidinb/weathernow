@@ -1,14 +1,5 @@
 /** @type {Detox.DetoxConfig} */
 module.exports = {
-  testRunner: {
-    args: {
-      '$0': 'jest',
-      config: './__tests__/__e2e__/jest.config.js'
-    },
-    jest: {
-      setupTimeout: 120000
-    }
-  },
   apps: {
     'ios.debug': {
       type: 'ios.app',

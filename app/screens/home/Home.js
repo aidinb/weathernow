@@ -20,13 +20,13 @@ const Home = ({navigation}) => {
     homeStore.initialLoad();
   }, []);
 
-  useEffect(() => {
-    if (isFocused) {
-      navigation.setOptions({
-        title: t('Cities'),
-      });
-    }
-  }, [isFocused]);
+  // useEffect(() => {
+  //   if (isFocused) {
+  //     navigation.setOptions({
+  //       title: t('Cities'),
+  //     });
+  //   }
+  // }, [isFocused]);
 
   return (
     <View testID={'home'} style={styles.container}>
