@@ -18,19 +18,14 @@ global.assert = chai.assert
 global.expect = chai.expect
 global.should = chai.should
 chai.should()
-
 jest.mock('@react-native-firebase/crashlytics', () => {
-    return {
-        crashlytics: jest.fn(() => ({
-            recordError: jest.fn(),
-            logEvent: jest.fn(),
-            setUserProperties: jest.fn(),
-            setUserId: jest.fn(),
-            setCurrentScreen: jest.fn(),
-            recordErrorCrashlytics: jest.fn()
-        }))
-    }
+  const recordErrorMock = jest.fn();
+  const logMock = jest.fn();
 
+  return () => ({
+    recordError: recordErrorMock,
+    log: logMock,
+  });
 })
 jest.mock('@react-native-firebase/analytics', () => {
     return {
@@ -99,9 +94,7 @@ jest.mock('@react-navigation/native', () => {
               return null
           }),
         navigation: {
-            navigate: jest.fn(()=>{
-                setOptions: jest.fn()
-            })
+            setOptions: jest.fn()
         }
     }
 });
@@ -120,19 +113,3 @@ jest.mock('@react-navigation/native-stack', () => ({
 
 
 jest.mock('@react-navigation/stack', () => {});
-
-
-jest.mock('@react-native-firebase/analytics', () => {
-    return {
-        setLogEvent: jest.fn(),
-        logEvent: jest.fn(),
-
-    }
-})
-jest.mock('@react-native-firebase/crashlytics', () => {
-    return {
-        logCrashlytics: jest.fn(),
-        log: jest.fn(),
-
-    }
-})
