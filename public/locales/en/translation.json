@@ -5,8 +5,10 @@
   "Hong Kong": "Hong Kong",
   "San Francisco": "San Francisco",
   "Tokyo": "Tokyo",
-  "Celsius": "Celsius",
+  "{{tempNumber}} Celsius": "{{tempNumber}} Celsius",
   "Cities": "Cities",
   "Weather": "Weather",
-  "Choose Language": "Choose Language"
+  "Choose Language": "Choose Language",
+  "English": "English",
+  "Dutch": "Dutch"
 }

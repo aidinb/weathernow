@@ -1,7 +1,48 @@
 # WeatherNow App
 
-WeatherNow is a mobile application developed using React Native.
-It provides users with real-time weather information for different locations.
+WeatherNow is a mobile application developed using React Native that provides users with real-time
+weather information for different locations. The app utilizes MobX for state management
+and facilitates store sharing between multiple screens with the same content.
+For larger projects, the MVVM (Model-View-ViewModel) architecture with MobX is
+the preferred approach. Here's a brief explanation of the different components
+and technologies used in WeatherNow:
+
+# MobX Store Sharing
+
+WeatherNow utilizes MobX for state management and facilitates store sharing between
+multiple screens that display similar content. With MobX, the shared data,
+such as weather information for different locations,
+can be accessed and updated across different screens easily.
+This approach promotes code reusability, reduces duplication,
+and improves overall efficiency and maintainability of the application.
+By leveraging MobX store sharing, larger projects can benefit from a consistent
+and centralized data management approach.
+
+# MVVM Architecture
+
+Model: The Model represents the data and business logic of the application.
+View: The View corresponds to the user interface and displays the weather information and other relevant data to the user.
+ViewModel: The ViewModel acts as a bridge between the Model and the View.
+It provides the necessary data and methods to update and manipulate the UI.
+
+# Realm for Offline Capability
+
+WeatherNow integrates Realm, a mobile database, to support offline functionality.
+Realm is chosen for its ease of use and efficient handling of schemas,
+allowing them to align closely with the backend structure.
+By utilizing Realm, the app can store and retrieve weather data even when the device is offline,
+ensuring a seamless user experience. Users can access previously fetched weather information
+without an internet connection.
+
+# JavaScript as the Primary Language
+
+The WeatherNow app is primarily written in JavaScript.
+The decision to use JavaScript is based on factors such as the developer's familiarity with
+the language and the compatibility with existing JavaScript-based codebases.
+While TypeScript is gaining popularity for its static typing and enhanced tooling,
+JavaScript was chosen due to the developer's proficiency and productivity.
+However, considering the benefits of TypeScript, transitioning to TypeScript in the future
+is accepted.
 
 ## Features
 
@@ -41,12 +82,21 @@ or
 yarn install
 ```
 
+```
+cd ./ios pod install
+```
+or
+```
+cd ./ios arch -x86_64 pod install for M1 Mac 
+```
+
 ### Configure Firebase
 
 1. Create a Firebase project on the Firebase console.
 2. Enable Firebase Analytics and Crashlytics for your project.
 3. Retrieve your Firebase configuration (API keys, project ID, etc.).
-4. Update the Firebase configuration in the app by replacing the placeholders in `src/firebase.js` with your own Firebase credentials.
+4. Update the Firebase configuration in the app by replacing the placeholders 
+5. in `src/firebase.js` with your own Firebase credentials.
 
 ### Configure i18n
 
@@ -120,8 +170,7 @@ npm run e2eAndroidRelease  build and run the android on release version
 ## Contributing
 
 Contributions to the WeatherNow app are welcome!
-If you want to contribute, please follow the guidelines outlined in the `CONTRIBUTING.md` file.
 
 ## License
 
-This project is licensed under the WeatherNow Aidin.
+This project is licensed under the WeatherNow Aidin Bazarchi.
