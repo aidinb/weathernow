@@ -10,9 +10,9 @@
     "test": "jest --silent",
     "eslint": "npx eslint --fix ./app",
     "e2eIosDebug": "detox build --configuration ios.sim.debug && detox test --configuration ios.sim.debug",
-    "e2eAndroidDebug": "detox build --configuration android.emu.debug && detox build --configuration android.emu.debug",
-    "e2eIosRelease": "detox build --configuration ios.sim.release && detox build --configuration ios.sim.release",
-    "e2eAndroidRelease": "detox build --configuration android.emu.release && detox build --configuration android.emu.release"
+    "e2eAndroidDebug": "detox build --configuration android.emu.debug && detox test --configuration android.emu.debug",
+    "e2eIosRelease": "detox build --configuration ios.sim.release && detox test --configuration ios.sim.release",
+    "e2eAndroidRelease": "detox build --configuration android.emu.release && detox test --configuration android.emu.release"
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.22.5",
