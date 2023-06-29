@@ -67,6 +67,9 @@
     "@react-native/eslint-config": "^0.72.2",
     "@react-native/metro-config": "^0.72.6",
     "@tsconfig/react-native": "^3.0.0",
+    "@types/chai": "^4.3.5",
+    "@types/enzyme": "^3.10.13",
+    "@types/jest": "^29.5.2",
     "@types/metro-config": "^0.76.3",
     "@types/react": "^18.2.14",
     "@types/react-test-renderer": "^18.0.0",
@@ -87,7 +90,7 @@
   "jest": {
     "preset": "react-native",
     "setupFiles": [
-      "./__config__/setupTest.js"
+      "./__config__/setupTest.ts"
     ],
     "collectCoverage": true,
     "coverageThreshold": {
@@ -104,8 +107,8 @@
       "jest-runner"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.ts",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.ts"
     },
     "modulePathIgnorePatterns": [
       "__e2e__"
