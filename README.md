@@ -54,6 +54,7 @@ Follow the instructions below to set up and run the WeatherNow app on your local
 Before starting, ensure that you have the following software installed:
 
 - React native Prerequisites 
+- Node greater than 16
 
 ### Clone the repository
 
