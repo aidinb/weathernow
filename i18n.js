@@ -55,6 +55,7 @@ i18n // loads translations from locize.com -> change to i18next-xhr-backend to l
         translation: nl,
       },
     },
+    nsSeparator: '|',
     debug: true,
     interpolation: {
       escapeValue: false, // not needed for react as it does escape per default to prevent xss!

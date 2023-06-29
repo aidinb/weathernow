@@ -9,7 +9,6 @@ import En from '../../public/images/en.svg';
 import Nl from '../../public/images/nl.svg';
 import ChooseLanguage from '../screens/home/ChooseLanguage';
 import i18n from 'i18next';
-
 const RootStack = createNativeStackNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +19,6 @@ export const renderScreens = () => {
         name="Home"
         component={Home}
         options={{
-          title: 'Cities',
           headerRight: props => (
             <TouchableOpacity
               onPress={() => NavigationService.navigate('ChooseLanguage')}>

@@ -1,11 +1,11 @@
 import {action, makeObservable, observable} from 'mobx';
 import Firebase from '../../actions/firebase';
 import {getCities} from '../../api/api';
-import {Stores} from '../../store';
 import NavigationService from '../../router/NavigationService';
 
 class HomeStore {
-  constructor() {
+  constructor(realmStore) {
+    this.realmStore = realmStore
     makeObservable(this, {
       cities: observable,
       loading: observable,
@@ -13,7 +13,7 @@ class HomeStore {
       selectedCity: observable,
       setCities: action,
       setLoading: action,
-      getCities: action,
+      getCitiesFromRealm: action,
       navigateToCityDetail: action,
       setSelectedCity: action,
       returnTemperature: action,
@@ -40,11 +40,12 @@ class HomeStore {
   };
   initialLoad = async () => {
     await this.addCitiesToRealm();
-    await this.getCities();
+    await this.getCitiesFromRealm();
   };
 
   addCitiesToRealm = async () => {
     try {
+      this.setLoading(true);
       const cities = await getCities();
       const cityWithTemprature = Object.values(
         cities.reduce((result, item) => {
@@ -64,18 +65,22 @@ class HomeStore {
         }, {}),
       );
       cityWithTemprature.forEach(cityData => {
-        Stores.realmStore.addCityToRealm(cityData);
+        this.realmStore.addCityToRealm(cityData);
       });
     } catch (err) {
       console.log('addCitiesToRealm err', err);
+    }finally {
+      this.setLoading(false);
+
     }
   };
 
-  getCities = async () => {
+  getCitiesFromRealm = async () => {
     try {
-      Firebase.logCrashlytics('getCities');
       this.setLoading(true);
-      const realmCities = Stores.realmStore.realmGetCities();
+
+      Firebase.logCrashlytics('getCities');
+      const realmCities = this.realmStore.realmGetCities();
 
       const sortedCities = realmCities.sort((a, b) =>
         a.name.localeCompare(b.name),

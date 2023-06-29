@@ -40,9 +40,23 @@ class RealmStore {
     }
   };
   realmGetCities = () => {
-    this.openRealm();
-    const realmCity = this.realm.objects('City');
-    return Object.values(JSON.parse(JSON.stringify(realmCity)));
+    try {
+      this.openRealm();
+      let realmCities = this.realm.objects('City');
+      realmCities = Object.values(JSON.parse(JSON.stringify(realmCities)))
+      const sortedCities = realmCities.sort((a, b) =>
+        a.name.localeCompare(b.name),
+      );
+      sortedCities.forEach(cityData => {
+        cityData.temperatures.sort(
+          (a, b) => new Date(a.date) - new Date(b.date),
+        );
+      });
+      return sortedCities;
+    }catch (err){
+      console.log('realmGetCities err', err);
+    }
+
   };
 }
 

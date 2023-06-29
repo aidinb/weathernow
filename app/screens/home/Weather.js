@@ -15,7 +15,7 @@ const Weather = ({navigation}) => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: homeStore.selectedCity.name,
+      title: t(homeStore.selectedCity.name),
     });
   }, [navigation, homeStore.selectedCity.name]);
 
@@ -25,10 +25,6 @@ const Weather = ({navigation}) => {
       keyExtractor={item => item.date}
       style={styles.list}
       contentContainerStyle={styles.listContainer}
-      onRefresh={async () => {
-        await homeStore.getCities();
-      }}
-      refreshing={homeStore.loading}
       renderItem={({item}) => (
         <View style={styles.itemContainer}>
           <Text style={styles.itemText}>
