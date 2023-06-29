@@ -2,6 +2,8 @@ import {action, makeObservable, observable} from 'mobx';
 import Firebase from '../../actions/firebase';
 import {getCities} from '../../api/api';
 import NavigationService from '../../router/NavigationService';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import i18n from 'i18next';
 
 class HomeStore {
   constructor(realmStore) {
@@ -19,6 +21,7 @@ class HomeStore {
       returnTemperature: action,
       addCitiesToRealm: action,
       initialLoad: action,
+      checkUserLanguage: action,
     });
   }
 
@@ -42,10 +45,10 @@ class HomeStore {
     try {
       await this.addCitiesToRealm();
       await this.getCitiesFromRealm();
-    }catch (err){
+    } catch (err) {
       console.log('initialLoad err', err);
+      Firebase.recordErrorCrashlytics('initialLoad', err);
     }
-
   };
 
   addCitiesToRealm = async () => {
@@ -74,6 +77,7 @@ class HomeStore {
       });
     } catch (err) {
       console.log('addCitiesToRealm err', err);
+      Firebase.recordErrorCrashlytics('addCitiesToRealm', err);
     } finally {
       this.setLoading(false);
     }
@@ -94,7 +98,7 @@ class HomeStore {
           (a, b) => new Date(a.date) - new Date(b.date),
         );
       });
-      console.log('sortedCities',sortedCities)
+      console.log('sortedCities', sortedCities);
       this.setCities(sortedCities);
     } catch (err) {
       Firebase.setLogEvent('getCities');
@@ -129,6 +133,18 @@ class HomeStore {
       return item.temp.toFixed(2);
     }
   }
+
+  checkUserLanguage = async () => {
+    try {
+      const savedLanguage = await AsyncStorage.getItem('language');
+      if (savedLanguage) {
+        await i18n.changeLanguage(savedLanguage);
+      }
+    } catch (err) {
+      console.log('checkUserLanguage', err);
+      Firebase.recordErrorCrashlytics('checkUserLanguage', err);
+    }
+  };
 }
 
 export default HomeStore;

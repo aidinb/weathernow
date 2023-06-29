@@ -1,6 +1,7 @@
 import {action, makeObservable, observable} from 'mobx';
 import schema from './realm';
 import Realm from 'realm';
+import Firebase from '../actions/firebase';
 
 class RealmStore {
   constructor() {
@@ -37,6 +38,7 @@ class RealmStore {
       });
     } catch (err) {
       console.log('addCityToRealm err', err);
+      Firebase.recordErrorCrashlytics('addCityToRealm', err);
     }
   };
   realmGetCities = () => {
@@ -55,6 +57,7 @@ class RealmStore {
       return sortedCities;
     } catch (err) {
       console.log('realmGetCities err', err);
+      Firebase.recordErrorCrashlytics('realmGetCities', err);
     }
   };
 }

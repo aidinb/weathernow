@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
   list: {
     width,
     flex: 1,
-
   },
   listContainer: {
     alignItems: 'center',

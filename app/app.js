@@ -7,10 +7,14 @@ import {navigationRef} from './router/NavigationService';
 import {useStores} from './store';
 
 const App = () => {
-  const {realmStore} = useStores();
+  const {realmStore, homeStore} = useStores();
 
   useEffect(() => {
     realmStore.openRealm();
+  }, []);
+
+  useEffect(() => {
+    homeStore.checkUserLanguage();
   }, []);
 
   return (
